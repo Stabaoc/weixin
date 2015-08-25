@@ -48,19 +48,7 @@ public class CoreService {
             // 文本消息  
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {  
                 String content = requestMap.get("Content");
-                System.out.println(content);
-                switch (content) {
-				case "？":
-				case "?":
-					respContent = getMainMenu();
-					break;
-				case "1":
-					respContent = "暂无";
-					break;
-				default:
-					//respContent = "您发送的是文本消息！";
-					break;
-				}
+                respContent = TextAnalyser.analyze(content);
             }  
             // 图片消息  
             else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {  
@@ -103,14 +91,5 @@ public class CoreService {
         }  
   
         return respMessage;  
-    }
-    
-    public static String getMainMenu() {  
-        StringBuffer buffer = new StringBuffer();  
-        buffer.append("您好，有什么可以帮忙的么？").append("\n");
-        buffer.append("回复指定数字，获得相应帮助：\n");
-        buffer.append("1  天气预报").append("\n");
-        buffer.append("回复“?”显示此帮助菜单");  
-        return buffer.toString();  
-    }  
+    } 
 }  
